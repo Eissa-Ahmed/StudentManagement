@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Department>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-4">Department List</h2>
+        <a asp-controller="Department" asp-action="Create" class="btn btn-primary">Add Department</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var department in Model)
+            {
+                <tr>
+                    <td>@department.Id</td>
+                    <td>@department.Name</td>
+                    <td class="d-flex justify-content-center align-items-center gap-2">
+                        <a asp-controller="Department" asp-action="Details" asp-route-id="@department.Id">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

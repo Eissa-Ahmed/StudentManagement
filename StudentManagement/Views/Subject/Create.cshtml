@@ -1,0 +1,39 @@
+﻿@model StudentManagement.Models.Subject
+
+@{
+    ViewData["Title"] = "Create Subject";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create New Student</h2>
+
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="row">
+            <!-- Name Field -->
+            <div class="col-md-6 mb-3">
+                <label for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="Name" name="Name" asp-for="Name" required>
+                <div class="invalid-feedback">
+                    Please enter the student's name.
+                </div>
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label for="DepartmentId" class="form-label">Department</label>
+                <select class="form-control" id="TeacherId" name="TeacherId" asp-for="TeacherId" asp-items="ViewBag.Teachers" required>
+                    <option value="">Select a teacher</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a department.
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create Student</button>
+        </div>
+    </form>
+</div>
+

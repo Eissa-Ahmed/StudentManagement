@@ -1,0 +1,21 @@
+﻿@model StudentManagement.Models.Subject
+
+<div class="container mt-5">
+    <h2>Edit Subject</h2>
+
+    <form asp-action="Update" method="post">
+
+
+        <div class="col-10 m-auto form-control">
+            <label for="Name">Name</label>
+            <input class="form-control" type="text" name="Name" asp-for="Name" value="@Model.Name" autofocus />
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="@Url.Action("Index", "Subject")" class="btn btn-secondary">Cancel</a>
+        </form>
+
+    
+
+</div>

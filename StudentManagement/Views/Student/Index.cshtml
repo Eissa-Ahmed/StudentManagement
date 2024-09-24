@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Student>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-4">Student List</h2>
+        <a asp-controller="Student" asp-action="Create" class="btn btn-primary">Add Student</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.Id</td>
+                    <td>@student.Name</td>
+                    <td>@student.Email</td>
+                    <td>@student.DateOfBirth.ToShortDateString()</td>
+                    <td>@student.Department.Name</td>
+                    <td class="d-flex justify-content-center align-items-center gap-2">
+                        <a asp-controller="Student" asp-action="Details" asp-route-id="@student.Id">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a asp-controller="Student" asp-action="Update" asp-route-id="@student.Id">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

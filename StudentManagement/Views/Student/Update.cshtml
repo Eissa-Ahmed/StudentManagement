@@ -1,0 +1,32 @@
+﻿@model StudentManagement.Models.Student
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container">
+    <h1 class="mb-3">Update Student</h1>
+    <form asp-action="Update" asp-controller="Student" method="post">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label asp-for="Name">Name</label>
+                <input class="form-control" type="text" asp-for="Name" value="@Model.Name" />
+            </div>
+            <div class=" col-6 mb-3">
+                <label asp-for="Email">Email</label>
+                <input class="form-control" type="email" asp-for="Email" value="@Model.Email" />
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-6 mb-3">
+                <label asp-for="DateOfBirth">Date Of Birth</label>
+                <input class="form-control" type="date" asp-for="DateOfBirth" value="@Model.DateOfBirth" />
+            </div>
+            <div class=" col-6 mb-3">
+                <label asp-for="DepartmentId">Department</label>
+                <select class="form-control" asp-for="DepartmentId" asp-items="ViewBag.Departments">
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+</div>
