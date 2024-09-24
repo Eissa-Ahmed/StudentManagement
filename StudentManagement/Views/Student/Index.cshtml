@@ -13,6 +13,7 @@
                 <th>Email</th>
                 <th>Date of Birth</th>
                 <th>Department</th>
+                <th>Subjects</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,7 +25,12 @@
                     <td>@student.Name</td>
                     <td>@student.Email</td>
                     <td>@student.DateOfBirth.ToShortDateString()</td>
-                    <td>@student.Department.Name</td>
+                    <td>@student.Department?.Name</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Student" asp-action="AddSubjects" asp-route-studentId="@student.Id">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </td>
                     <td class="d-flex justify-content-center align-items-center gap-2">
                         <a asp-controller="Student" asp-action="Details" asp-route-id="@student.Id">
                             <i class="fa-solid fa-eye"></i>

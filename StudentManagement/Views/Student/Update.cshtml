@@ -19,7 +19,7 @@
         <div class="row">
             <div class=" col-6 mb-3">
                 <label asp-for="DateOfBirth">Date Of Birth</label>
-                <input class="form-control" type="date" asp-for="DateOfBirth" value="@Model.DateOfBirth" />
+                <input class="form-control" type="date" asp-for="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
             </div>
             <div class=" col-6 mb-3">
                 <label asp-for="DepartmentId">Department</label>
