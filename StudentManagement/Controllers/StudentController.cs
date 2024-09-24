@@ -75,7 +75,7 @@ namespace StudentManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Student student, List<int> SubjectsIds)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();//
         }
     }
 }
