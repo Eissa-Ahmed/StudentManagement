@@ -26,8 +26,8 @@
                     <td>@student.Email</td>
                     <td>@student.DateOfBirth.ToShortDateString()</td>
                     <td>@student.Department?.Name</td>
-                    <td>
-                        <a class="btn btn-primary" asp-controller="Student" asp-action="AddSubjects" asp-route-studentId="@student.Id">
+                    <td >
+                        <a class="btn btn-primary w-100" asp-controller="Student" asp-action="AddSubjects" asp-route-studentId="@student.Id">
                             <i class="fa-solid fa-plus"></i>
                         </a>
                     </td>
