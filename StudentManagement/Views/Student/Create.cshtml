@@ -1,4 +1,4 @@
-﻿@model StudentManagement.Models.Student
+﻿@model CreateStudentVM
 
 @{
     ViewData["Title"] = "Create Student";
@@ -13,18 +13,14 @@
             <div class="col-md-6 mb-3">
                 <label for="Name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="Name" name="Name" asp-for="Name" required>
-                <div class="invalid-feedback">
-                    Please enter the student's name.
-                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <!-- Email Field -->
             <div class="col-md-6 mb-3">
                 <label for="Email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="Email" name="Email" asp-for="Email" required>
-                <div class="invalid-feedback">
-                    Please enter a valid email address.
-                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
         </div>
 
@@ -32,10 +28,8 @@
             <!-- Date of Birth Field -->
             <div class="col-md-6 mb-3">
                 <label for="DateOfBirth" class="form-label">Date of Birth</label>
-                <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" asp-for="DateOfBirth" required>
-                <div class="invalid-feedback">
-                    Please select a valid date.
-                </div>
+                <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth" asp-for="DateOfBirth">
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
 
             <!-- Department Field -->
@@ -44,9 +38,7 @@
                 <select class="form-control" id="DepartmentId" name="DepartmentId" asp-for="DepartmentId" asp-items="ViewBag.Departments" required>
                     <option value="">Select a department</option>
                 </select>
-                <div class="invalid-feedback">
-                    Please select a department.
-                </div>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
         </div>
 
@@ -54,8 +46,9 @@
         <div class="row">
             <div class="col-md-12 mb-3">
                 <label for="Subjects" class="form-label">Select Subjects</label>
-                <select multiple class="form-control" id="Subjects" name="SubjectsIds" asp-items="ViewBag.Subjects">
+                <select multiple class="form-control" id="Subjects" asp-for="SubjectsIds" asp-items="ViewBag.Subjects">
                 </select>
+                <span asp-validation-for="SubjectsIds" class="text-danger"></span>
             </div>
         </div>
 
@@ -67,22 +60,6 @@
 </div>
 
 @section Scripts {
-    <script>
-        // Enable Bootstrap validation on the form
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

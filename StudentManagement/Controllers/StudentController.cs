@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentManagement.Context;
 using StudentManagement.ViewModel;
@@ -8,12 +9,24 @@ namespace StudentManagement.Controllers
     public class StudentController : Controller
     {
         private readonly StudentContext _context;
+        private readonly IMapper _mapperr;
 
-        public StudentController(StudentContext context)
+        public StudentController(StudentContext context, IMapper mapperr)
         {
             _context = context;
+            _mapperr = mapperr;
         }
 
+        public async Task<IActionResult> NameIsUnique(string Name)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Name == Name);
+            return Json(student == null);
+        }
+        public async Task<IActionResult> EmailIsUnique(string Email)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Email == Email);
+            return Json(student == null);
+        }
         public async Task<IActionResult> Index()
         {
             var students = await _context.Students.Include(s => s.Department).ToListAsync();
@@ -42,26 +55,18 @@ namespace StudentManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Student student, List<int> SubjectsIds)
+        public async Task<IActionResult> Create(CreateStudentVM model)
         {
             if (ModelState.IsValid)
             {
-                foreach (var subjectId in SubjectsIds)
-                {
-                    var studentSubject = new StudentSubject
-                    {
-                        StudentId = student.Id,
-                        SubjectId = subjectId
-                    };
-                    student.StudentSubjects.Add(studentSubject);
-                }
+                var student = _mapperr.Map<Student>(model);
                 await _context.Students.AddAsync(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Departments = new SelectList(await _context.Departments.ToListAsync(), "Id", "Name", student.DepartmentId);
-            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name");
-            return View(student);
+            ViewBag.Departments = new SelectList(await _context.Departments.ToListAsync(), "Id", "Name", model.DepartmentId);
+            ViewBag.Subjects = new SelectList(await _context.Subjects.ToListAsync(), "Id", "Name", model.SubjectsIds);
+            return View(model);
         }
 
         public async Task<IActionResult> Update(int id)
